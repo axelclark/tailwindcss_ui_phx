@@ -19,6 +19,11 @@ defmodule TailwindcssPhoenixWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/cms", TailwindcssPhoenixWeb.CMS, as: :cms do
+    pipe_through :browser
+    resources "/pages", PageController
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", TailwindcssPhoenixWeb do
   #   pipe_through :api
