@@ -10,7 +10,7 @@
   <body>
     <div>
       <nav class="bg-gray-800">
-        <div x-data="{ menuOpen: false }">
+        <div x-data="{ menuOpen: false, dropdown: false }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="flex items-center justify-between h-16">
             <div class="flex items-center">
@@ -43,7 +43,11 @@
                 <!-- Profile dropdown -->
                 <div class="ml-3 relative">
                   <div>
-                    <button class="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid" id="user-menu" aria-label="User menu" aria-haspopup="true">
+                    <button
+                      @click="dropdown = !dropdown; console.log('hey')"
+                      class="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid"
+                      id="user-menu" aria-label="User menu" aria-haspopup="true"
+                    >
                       <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
                     </button>
                   </div>
@@ -57,7 +61,16 @@
                     From: "transform opacity-100 scale-100"
                     To: "transform opacity-0 scale-95"
                   -->
-                  <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg">
+                  <div
+                    x-show="dropdown"
+                    x-transition:enter="transition ease-out duration-100"
+                    x-transition:enter-start="opacity-0 scale-95"
+                    x-transition:enter-end="opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-75"
+                    x-transition:leave-start="opacity-100 scale-100"
+                    x-transition:leave-end="opacity-0 scale-95"
+                    class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg"
+                  >
                     <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                       <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Your Profile
                       </a>
